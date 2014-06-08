@@ -249,7 +249,7 @@ public class ModRecipe
             if(OreDictionaryUtil.getOreDicItemStack("dust" + mass.unlocalizedName) != null)
             {
                 GameRegistry.addRecipe(new ShapedOreRecipe(
-                        OreDictionaryUtil.getOreDicItemStack("dust" + mass.unlocalizedName),
+                        OreDictionaryUtil.getOreDicItemStack("dust" + mass.unlocalizedName, 2),
                         "H","O",
                         'H',"craftingToolHardHammer",
                         'O',"mass" + mass.unlocalizedName

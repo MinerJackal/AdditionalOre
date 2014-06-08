@@ -5,8 +5,7 @@ import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.common.Configuration;
 
-public class ConfigurationManager
-{
+public class ConfigurationManager {
     public static Configuration config;
     public static int BlockID = 4000;
 
@@ -60,55 +59,51 @@ public class ConfigurationManager
 
     public static boolean isLoadedGregTech = false;
 
-    public ConfigurationManager(Configuration cfg)
-    {
+    public ConfigurationManager(Configuration cfg) {
         this.config = cfg;
     }
 
-    public int getItem(String key,int defaultID)
-    {
-        return config.get("ITEM",key,defaultID).getInt();
+    public int getItem(String key, int defaultID) {
+        return config.get("ITEM", key, defaultID).getInt();
     }
 
-    public static int getItem(String key)
-    {
-        return config.get("ITEM",key,ItemID++).getInt();
+    public static int getItem(String key) {
+        return config.get("ITEM", key, ItemID++).getInt();
     }
 
-    public int getBlock(String key,int defaultID)
-    {
-        return config.get("BLOCK",key,defaultID).getInt();
+    public int getBlock(String key, int defaultID) {
+        return config.get("BLOCK", key, defaultID).getInt();
     }
 
-    public static int getBlock(String key)
-    {
-        return config.get("BLOCK",key,BlockID++).getInt();
+    public static int getBlock(String key) {
+        return config.get("BLOCK", key, BlockID++).getInt();
     }
 
-    public static boolean getGEN(String key, boolean value)
-    {
-        return config.get("ORE GEN",key,value).getBoolean(value);
+    public static boolean getGEN(String key, boolean value) {
+        return config.get("ORE GEN", key, value).getBoolean(value);
     }
 
-    public static void save()
-    {
+    public static boolean getGENRAL(String key, boolean value) {
+        return config.get("GENERAL", key, value).getBoolean(value);
+    }
+
+    public static void save() {
         config.save();
     }
 
-    public static void loadConfig(FMLPreInitializationEvent event)
-    {
+    public static void loadConfig(FMLPreInitializationEvent event) {
         ConfigurationManager cfg = new ConfigurationManager(new Configuration(event.getSuggestedConfigurationFile()));
 
         ID_blockOre = getBlock("Block Ore");
         ID_CrackBlock = getBlock("Block CrackStone");
 
-        ID_masses = getItem("Mass Item");				//塊
-        ID_dusts = getItem("Dust Item");				//粉
-        ID_ingots = getItem("Ingot Item");				//インゴット
-        ID_nuggets = getItem("Nugget Item");			//ナゲット
-        ID_gems = getItem("Gem Item");					//宝石
+        ID_masses = getItem("Mass Item");                //塊
+        ID_dusts = getItem("Dust Item");                //粉
+        ID_ingots = getItem("Ingot Item");                //インゴット
+        ID_nuggets = getItem("Nugget Item");            //ナゲット
+        ID_gems = getItem("Gem Item");                    //宝石
 
-        ID_pickaxes[0] = getItem("Copper Pickaxe");		//銅のつるはし
+        ID_pickaxes[0] = getItem("Copper Pickaxe");        //銅のつるはし
         ID_pickaxes[1] = getItem("Bronze Pickaxe");     //青銅のつるはし
         ID_pickaxes[2] = getItem("Steel Pickaxe");     //鋼鉄のつるはし
         ID_pickaxes[3] = getItem("Titanium Pickaxe");
@@ -120,11 +115,12 @@ public class ConfigurationManager
 
         ID_Hammer[0] = getItem("Wooden Hammer");
         ID_Hammer[1] = getItem("Stone Hammer");
-        ID_Hammer[2] = getItem("Iron Hammer");
-        ID_Hammer[3] = getItem("Bronze Hammer");
-        ID_Hammer[4] = getItem("Steel Hammer");
-        ID_Hammer[5] = getItem("TungstenSteel Hammer");
-        ID_Hammer[6] = getItem("Titanium Hammer");
+        ID_Hammer[2] = getItem("Copper Hammer");
+        ID_Hammer[3] = getItem("Iron Hammer");
+        ID_Hammer[4] = getItem("Bronze Hammer");
+        ID_Hammer[5] = getItem("Steel Hammer");
+        ID_Hammer[6] = getItem("TungstenSteel Hammer");
+        ID_Hammer[7] = getItem("Titanium Hammer");
 
         ID_Sickel[0] = getItem("Wooden Sickel");
         ID_Sickel[1] = getItem("Stone Sickel");
@@ -145,35 +141,28 @@ public class ConfigurationManager
         ID_Paxel[4] = getItem("Bronze Paxel");
         ID_Paxel[5] = getItem("Steel Paxel");
 
-        GenCopper = getGEN("can Generation CopperOre?",true);
-        GenTin = getGEN("can Generation Tin Ore?",true);
-        GenCrackStone = getGEN("can Generation Quartz Ore?",true);
-        GenBauxite = getGEN("can Generation Bauxite Ore?",true);
-        GenSilver = getGEN("can Generation Silver Ore?",true);
-        GenNickel = getGEN("can Generation Nickel Ore?",true);
-        GenLead = getGEN("can Generation Lead Ore?",true);
-        GenUranium = getGEN("can Generation Uranium Ore?",true);
+        GenCopper = getGEN("can Generation CopperOre?", true);
+        GenTin = getGEN("can Generation Tin Ore?", true);
+        GenCrackStone = getGEN("can Generation Quartz Ore?", true);
+        GenBauxite = getGEN("can Generation Bauxite Ore?", true);
+        GenSilver = getGEN("can Generation Silver Ore?", true);
+        GenNickel = getGEN("can Generation Nickel Ore?", true);
+        GenLead = getGEN("can Generation Lead Ore?", true);
+        GenUranium = getGEN("can Generation Uranium Ore?", true);
 
-
-
-
-
+        canInductionSteel = getGENRAL("can InductionSmelting for Steel?",true);
         save();
 
     }
 
-    public static void loadedMods()
-    {
-        if(Loader.isModLoaded("IC2"))
-        {
+    public static void loadedMods() {
+        if (Loader.isModLoaded("IC2")) {
             isLoadedInductrialCraft2 = true;
-            if(Loader.isModLoaded("GregTech-Addon"))
-            {
+            if (Loader.isModLoaded("GregTech-Addon")) {
                 isLoadedGregTech = true;
             }
         }
-        if(Loader.isModLoaded("ThermalExpantion"))
-        {
+        if (Loader.isModLoaded("ThermalExpansion")) {
             isLoadedThermalExpantion2 = true;
         }
 

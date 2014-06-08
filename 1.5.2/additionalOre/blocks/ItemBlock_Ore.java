@@ -22,7 +22,7 @@ public class ItemBlock_Ore extends ItemBlock
     @Override
     public String getUnlocalizedName(ItemStack itemStack)
     {
-        return Enum_ores.VALID_ARGS[itemStack.getItemDamage()].unlocalizedName +" Ore";
+        return Enum_Ores.VALID_ARGS[itemStack.getItemDamage()].unlocalizedName +" Ore";
     }
 
 }

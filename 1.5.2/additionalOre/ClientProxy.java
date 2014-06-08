@@ -7,25 +7,21 @@ import net.minecraft.entity.player.EntityPlayer;
 
 
 @SideOnly(Side.CLIENT)
-public class ClientProxy extends CommonProxy
-{
+public class ClientProxy extends CommonProxy {
 
     @Override
-	public void registerTextures()
-    {
+    public void registerTextures() {
 
-	}
+    }
 
     @Override
-    public EntityPlayer getPlayer()
-    {
+    public EntityPlayer getPlayer() {
         return FMLClientHandler.instance().getClient().thePlayer;
     }
 
-	@Override
-	public void registerAnimation()
-    {
+    @Override
+    public void registerAnimation() {
 
-	}
+    }
 
 }

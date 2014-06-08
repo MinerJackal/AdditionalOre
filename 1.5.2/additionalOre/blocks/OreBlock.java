@@ -19,84 +19,71 @@ import net.minecraftforge.oredict.OreDictionary;
 import java.util.ArrayList;
 import java.util.List;
 
-public class OreBlock extends Block
-{
+public class OreBlock extends Block {
 
-	protected ItemStack dropItem;
+    protected ItemStack dropItem;
 
-	public OreBlock(int blockID)
-    {
+    public OreBlock(int blockID) {
         super(blockID, Material.rock);
-		setStepSound(soundStoneFootstep);
-		setHardness(1.5F);
-		setResistance(3F);
-		setCreativeTab(AdditionalOre.TABS_ore);
+        setStepSound(soundStoneFootstep);
+        setHardness(1.5F);
+        setResistance(3F);
+        setCreativeTab(AdditionalOre.TABS_ore);
         Register();
-	}
+    }
 
-    public void Register()
-    {
-        GameRegistry.registerBlock(this,ItemBlock_Ore.class,"OreBlock");
-        for(Enum_ores O: Enum_ores.VALID_ARGS)
-        {
-            LanguageRegistry.addName(new ItemStack(this,1,O.meta),O.unlocalizedName + "ore");
+    public void Register() {
+        GameRegistry.registerBlock(this, ItemBlock_Ore.class, "OreBlock");
+        for (Enum_Ores O : Enum_Ores.VALID_ARGS) {
+            LanguageRegistry.addName(new ItemStack(this, 1, O.meta), O.unlocalizedName + "ore");
             LanguageRegistry.instance().addNameForObject(new ItemStack(this, 1, O.meta), "ja_JP", O.jpNames + "鉱石");
-            OreDictionary.registerOre("ore" + O.unlocalizedName,new ItemStack(this, 1, O.meta));
-            JapanAPI.EVENT_entityItemPickupEventHook.addCoercedList("ore" + O.unlocalizedName, new ItemStack(this,1,O.meta));
+            OreDictionary.registerOre("ore" + O.unlocalizedName, new ItemStack(this, 1, O.meta));
+            JapanAPI.EVENT_entityItemPickupEventHook.addCoercedList("ore" + O.unlocalizedName, new ItemStack(this, 1, O.meta));
         }
     }
 
 
-    public String getUnlocalizedName(ItemStack itemStack)
-    {
-        return "additionalOre:" + Enum_ores.VALID_ARGS[itemStack.getItemDamage()].unlocalizedName + " Ore";
+    public String getUnlocalizedName(ItemStack itemStack) {
+        return "additionalOre:" + Enum_Ores.VALID_ARGS[itemStack.getItemDamage()].unlocalizedName + " Ore";
     }
 
-	@SideOnly(Side.CLIENT)
-	@Override
-	public Icon getIcon(int side, int meta)
-    {
-        return Enum_ores.VALID_ARGS[meta].texture;
+    @SideOnly(Side.CLIENT)
+    @Override
+    public Icon getIcon(int side, int meta) {
+        return Enum_Ores.VALID_ARGS[meta].texture;
     }
 
-	@SideOnly(Side.CLIENT)
-	@Override
-	public void registerIcons(IconRegister iconRegister)
-    {
-        for(Enum_ores O : Enum_ores.VALID_ARGS)
-        {
+    @SideOnly(Side.CLIENT)
+    @Override
+    public void registerIcons(IconRegister iconRegister) {
+        for (Enum_Ores O : Enum_Ores.VALID_ARGS) {
             O.loadTextures(iconRegister);
         }
     }
 
 
-	@Override
-	public ArrayList<ItemStack> getBlockDropped(World world, int x, int y, int z, int metadata, int fortune)
-    {
-        ArrayList<ItemStack>list = new ArrayList<ItemStack>();
-        Enum_ores ore = Enum_ores.VALID_ARGS[metadata];
+    @Override
+    public ArrayList<ItemStack> getBlockDropped(World world, int x, int y, int z, int metadata, int fortune) {
+        ArrayList<ItemStack> list = new ArrayList<ItemStack>();
+        Enum_Ores ore = Enum_Ores.VALID_ARGS[metadata];
 
 
         int count = (fortune + 1) + JapanAPI.RANDOM.nextInt(fortune + 1);
 
 
-
-
-        dropXpOnBlockBreak(world,x,y,z, MathHelper.getRandomIntegerInRange(JapanAPI.RANDOM,ore.MIN_EXP,ore.MAX_EXP));
+        dropXpOnBlockBreak(world, x, y, z, MathHelper.getRandomIntegerInRange(JapanAPI.RANDOM, ore.MIN_EXP, ore.MAX_EXP));
         list.add(ore.drop == null ? ore.getItemStack() : ore.getDropStack(count));
 
 
-		return list;
-	}
+        return list;
+    }
 
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void getSubBlocks(int blockid, CreativeTabs creativeTab,List list)
-    {
-        for(Enum_ores O : Enum_ores.VALID_ARGS)
-        {
-            list.add(new ItemStack(this,1,O.meta));
+    public void getSubBlocks(int blockid, CreativeTabs creativeTab, List list) {
+        for (Enum_Ores O : Enum_Ores.VALID_ARGS) {
+            list.add(new ItemStack(this, 1, O.meta));
         }
     }
 }
