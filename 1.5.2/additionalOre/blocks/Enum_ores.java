@@ -20,9 +20,9 @@ public enum Enum_Ores {
     LEAD("Lead", "鉛", ItemMass.Mass.LEAD.getItemStack(), 1, 3, 1, 10),
     NICKEL("Nickel", "ニッケル", ItemMass.Mass.NICKEL.getItemStack(), 1, 3, 1, 10),
     SILVER("Silver", "銀", ItemMass.Mass.SILVER.getItemStack(), 1, 3, 1, 10),
-    RUBY("Ruby", "紅玉", ItemGem.Gems.RUBY.getItemStack(), 1, 4, 1, 10),
-    SAPPHIRE("Sapphire", "碧玉", ItemGem.Gems.SAPPHIRE.getItemStack(), 1, 4, 1, 10),
-    GREEN_SAPPHIRE("GreenSapphire", "緑碧玉", OreDictionaryUtil.getOreDicItemStack("gemGreenSapphire"), 1, 4, 1, 10),;
+    RUBY("Ruby", "ルビー", ItemGem.Gems.RUBY.getItemStack(), 1, 4, 1, 10),
+    SAPPHIRE("Sapphire", "サファイア", ItemGem.Gems.SAPPHIRE.getItemStack(), 1, 4, 1, 10),
+    GREEN_SAPPHIRE("GreenSapphire", "グリーンサファイア", OreDictionaryUtil.getOreDicItemStack("gemGreenSapphire"), 1, 4, 1, 10),;
     public static Enum_Ores[] VALID_ARGS = values();
     public final int meta = this.ordinal();
     protected final int MIN_DROP;
